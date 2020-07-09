@@ -296,7 +296,44 @@ Note: if you'll not pass `return_url` in parameters we'll not display banner at 
 ```
 
 
+# Locations
+## Get all locations
+This endpoint retrieves locations according to user.
+### HTTP Request
+`GET https://my.timeline.is/api/v3p/locations`
 
+```shell
+curl "https://my.timeline.is/api/v3p/locations" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "data": [
+    {
+      "id": "5f072437410927adfe5be1e6",
+      "type": "locations",
+      "attributes": {
+        "active": true,
+        "address": "5 Dudley Gardens, RM3 8LJ",
+        "city": null,
+        "coordinates": [40.7143528, -74.0059731],
+        "country": null,
+        "latitude": -74.0059731,
+        "longitude": 40.7143528,
+        "name": "et1",
+        "postcode": null,
+        "region": null,
+        "sname": "et1",
+        "state": null,
+        "timeline_id": "5f072437410927adfe5be1e5"
+      }
+    }
+  ],
+  "jsonapi": { "version": "1.0" }
+}
+```
 
 
 # LPR
