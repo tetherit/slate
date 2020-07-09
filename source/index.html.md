@@ -25,9 +25,73 @@ Welcome to the Tether API! You can use our API to access Tether API endpoints, w
 
 You can view code examples in the dark area to the right
 
-Before start please read documentation how to generate oAuth token [here](https://my.timeline.is/help/developers/oauth2)
 
 
+
+
+
+# oAuth2 Integration
+Before you'll start work with API you need to generate your oAuth2 token.
+
+
+## Register your client app
+
+<aside class="notice">
+Make sure the user is an <b>integrator</b>, you can check by going to <b>Admin -> Users -> User</b>
+</aside>
+
+Give the user permission to create an oAuth2 application by going to: <b>Admin -> Users -> User -> Permissions</b> and ticking the <b>Allow Creating oAuth2 Applications</b> checkbox:
+
+<img src="images/access_checkbox.png" />
+
+Create a new oauth application by going to <b>Admin -> Users -> User -> API Details</b> and clicking the <b>Create oAuth Application</b> button. Enter a valid application name and redirect uri, after saving you will see your all registered applications:
+
+<img src="images/create_app_btn.png" width="49%" />
+<img src="images/create_modal.png" width="49%"/>
+
+<img src="images/app_list.png" width="100%"/>
+
+## Request authorisation
+To request the authorisation token, you can use a compatible oauth2 library, for example: [oauth2](https://github.com/oauth-xx/oauth2) for ruby, or by visiting the URL manually and clicking "Authorise".
+
+`https://my.timeline.is/oauth/authorize?client_id=YOUR_API_KEY&redirect_uri=https%3A%2F%2Fmy.site.com%2Fcallback%2Furl&response_type=code`
+
+<aside class="notice">
+<b>Note:</b> Replace YOUR_API_KEY with Tether oauth Api Key
+</aside>
+
+<aside class="notice">
+<b>Note:</b> If you are not logged in, you will be redirected to the login page. After successfully logging in, you will be redirected to the authorisation page.
+</aside>
+<img src="images/authorise_page.png" width="100%"/>
+
+## Redirect URI
+After authorisation, the system will automatically redirect you to your REDIRECT_URI, which you configured above. For example:
+
+`https://my.site.com/callback/url?code=380762fb28c7c17d096a06fce974535c8129ab8a13fab5608a4e1c1075bbf01a`
+
+## Requesting the Access Token
+To request the access token, you need to send a post request with the returned code above. To do this, you can use any HTTP client.
+
+> In this example, we use `rest-client` for ruby:
+
+```shell
+parameters = 'client_id=YOUR_API_KEY&client_secret=YOUR_API_SECRET&code=RETURNED_CODE&grant_type=authorization_code&redirect_uri=https%3A%2F%2Fmy.site.com%2Fcallback%2Furl'
+
+RestClient.post 'http://my.timeline.is/oauth/token', parameters
+```
+
+> The response look something like this:
+
+```json
+{
+  "access_token": "de6780bc506a0446309bd9362820ba8aed28aa506c71eedbe1c5c4f9dd350e54",
+  "token_type": "Bearer",
+  "expires_in": 2629746,
+  "refresh_token": "8257e65c97202ed1726cf9571600918f3bffb2544b26e00a61df9897668c33a1",
+  "created_at": 1569313222
+}
+```
 
 # Events
 ## Get events in period of time
@@ -206,7 +270,7 @@ If you want to display events in time period use `events[from_time]` and `events
 
 If you want to get event at a certain point in time - use `at` parameter. In this case `zone` is required parameter.
 
-<aside class="error">
+<aside class="notice">
 Note: if you'll not pass `return_url` in parameters we'll not display banner at the top of site
 </aside>
 
@@ -601,7 +665,7 @@ curl "https://my.timeline.is/api/v3p/recordings/5f06e5f241092794fc255ded" -H "Au
 You can generate correct url to our site to display recording at a certain point in time and pass `return_url`. We display banner at the top of site with link to your `redirect_url`.
 It's very useful if you want to display recording on our site and have possibility to return to yours.
 
-<aside class="error">
+<aside class="notice">
 Note: if you'll not pass `return_url` in parameters we'll not display banner at the top of site
 </aside>
 
