@@ -381,11 +381,10 @@ This endpoint retrieves all zones related to user.
 | location_id | query | Filters By Location Id | No | String |
 
 
-> The above command returns JSON structured like this:
-
 ```shell
 curl "https://my.timeline.is/api/v3p/zones" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
 ```
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -426,6 +425,7 @@ This endpoint retrieves all recordings related to user.
 ```shell
 curl "https://my.timeline.is/api/v3p/recordings?zone_id=5f06e4e741092794a7010c29" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
 ```
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -503,6 +503,7 @@ This endpoint retrives single recording object by passed `id`
 ```shell
 curl "https://my.timeline.is/api/v3p/recordings/5f06e5f241092794fc255ded" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
 ```
+> The above command returns JSON structured like this:
 
 ```json
 {
