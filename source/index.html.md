@@ -405,6 +405,90 @@ curl "https://my.timeline.is/api/v3p/lpr?token=052om1JmDLxIOnwRLc6ppw&zone_id=5f
 }
 ```
 
+# LPR Plates
+## Get license plates whitelist and blacklist
+This endpoint retrieves all lpr plates.
+### HTTP Request
+`GET https://my.timeline.is/api/v3p/lpr_plates`
+
+
+```shell
+curl "https://my.timeline.is/api/v3p/lpr_plates" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "data": [{
+    "id": "60807953638d9d57daa71707",
+    "type": "lprplates",
+    "attributes": {
+      "plate_number": "SV05OSL2",
+      "group": "whitelist",
+      "expiry_date": "2021-04-21T20:13:23.440+01:00",
+      "updated_at": "2021-04-21T20:13:23.441+01:00",
+      "created_at": "2021-04-21T20:13:23.441+01:00",
+      "agent_id": "6080794a638d9d57daa71704"
+    }
+  }],
+  "jsonapi": { "version": "1.0" }
+}
+```
+
+## Create license plate
+This endpoint creates whitelist blacklist license plate.
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/lpr_plates`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| plate_number | query | License plate number| Yes | String |
+| group | query | whitelist or blacklist | No | String |
+| expiry_date | query | Expiry date | No | Datetime |
+| agent_id | query | Tetherbox id | Yes | String |
+
+
+```shell
+curl "https://my.timeline.is/api/v3p/lpr_plates" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "data": {
+    "id": "60807953638d9d57daa71707",
+    "type": "lprplates",
+    "attributes": {
+      "plate_number": "SV05OSL2",
+      "group": "whitelist",
+      "expiry_date": "2021-04-21T20:13:23.440+01:00",
+      "updated_at": null,
+      "created_at": "2021-04-21T20:13:23.441+01:00",
+      "agent_id": "6080794a638d9d57daa71704"
+    }
+  },
+  "jsonapi": { "version": "1.0" }
+}
+```
+
+## Delete license plate
+This endpoint deletes whitelist blacklist license plate.
+### HTTP Request
+`DELETE https://my.timeline.is/api/v3p/lpr_plates/:id`
+
+```shell
+curl "https://my.timeline.is/api/v3p/lpr_plates/:id" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
+```
+
+**Responses**
+
+| Code | Description |
+| ---- | ----------- |
+| 200 | No Content |
 
 
 
