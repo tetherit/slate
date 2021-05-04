@@ -637,7 +637,8 @@ curl "https://my.timeline.is/api/v3p/zones" -H "Authorization: Bearer YOUR_OAUTH
       "id": "5f06d4064109279130d5d6f3",
       "type": "zones",
       "attributes": {
-        "name": "Camera 2"
+        "name": "Camera 2",
+        "active": true
       }
     }
   ],
