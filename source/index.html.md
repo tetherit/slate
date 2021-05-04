@@ -335,6 +335,49 @@ curl "https://my.timeline.is/api/v3p/locations" -H "Authorization: Bearer YOUR_O
 }
 ```
 
+## Arm location
+This endpoint arms location with passed delay.
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/locations/:id/arm`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| delay | query/body | Delay in seconds after system will trigger  location | no | Integer  |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/locations/:id/arm" \
+     --data '{"delay":"5"}' \
+     --request POST \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+
+> The above command returns 200 status without body
+
+## Disarm location
+This endpoint disarms location with passed delay.
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/locations/:id/disarm`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| delay | query/body | Delay in seconds after system will trigger  location | no | Integer  |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/locations/:id/disarm" \
+     --data '{"delay":"5"}' \
+     --request POST \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+
+> The above command returns 200 status without body
 
 # LPR
 ## Get license plates
@@ -548,6 +591,22 @@ When you open our Web site and go to liveview, you can change preset by this end
 
 
 
+## Display zones by location
+
+If you want to select camera by location you can pass `location_id` in the url. In case if you have only 4 cameras for this location it will select smallest layout available (i.e. 4 camera layout) and show cameras for this location. In case if there are more than 36 cameras, you can pass additional `group` parameter, ie: `group=1`, `group=2` etc, to see the next "page" for this location.
+
+<aside class="notice">
+Note: if you want to see banner at the top of the site with link to your `redirect_url` you can pass `return_url` parameter to the path.
+</aside>
+
+
+### HTTP Request
+`GET https://my.timeline.is/perspectives?location_id=5f06d4064109279130d5d6f3&group=2&return_url=http://your.some.site`
+
+
+
+
+
 
 # Zones
 
@@ -587,6 +646,94 @@ curl "https://my.timeline.is/api/v3p/zones" -H "Authorization: Bearer YOUR_OAUTH
 ```
 
 
+## Arm zones
+This endpoint arms cameras for passed zones with passed delay.
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/zones/arm`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| zone_ids | query/body | Zone ids splitted by comma | Yes | String |
+| delay | query/body | Delay in seconds after system will trigger zone | no | Integer  |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/zones/arm" \
+     --data '{"zone_ids":"5d1f0bf741092775efbddd71,5d1f0bf441092775efbddd23","delay":"5"}' \
+     --request POST \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+
+> The above command returns 200 status without body
+
+
+
+## Disarm zones
+This endpoint disarms cameras for passed zones with passed delay.
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/zones/disarm`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| zone_ids | query/body | Zone ids splitted by comma | Yes | String |
+| delay | query/body | Delay in seconds after system will trigger zone | no | Integer  |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/zones/disarm" \
+     --data '{"zone_ids":"5d1f0bf741092775efbddd71,5d1f0bf441092775efbddd23","delay":"5"}' \
+     --request POST \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+
+> The above command returns 200 status without body
+
+
+
+
+
+
+## Trigger vmd event
+This endpoint adds possibility to trigger vmd event. It creates event with proper icon. You should pass event description to the request. Here is available vmd descriptions:<br/>
+'PIR alarm', 'FaceDetection', 'facedetection alarm', 'Motion alarm', 'VideoMotion', 'VideoMotionInfo', 'linedetection alarm', 'CrossLineDetection', 'VideoLoss', 'VideoBlind', 'AlarmLocal', 'CrossRegionDetection', 'LeftDetection', 'TakenAwayDetection', 'VideoAbnormalDetection', 'AudioMutation', 'AudioAnomaly', 'VideoUnFocus', 'WanderDetection', 'RioterDetection', 'ParkingDetection', 'vehicledetection alarm', 'MoveDetection', 'StorageNotExist', 'StorageFailure', 'StorageLowSpace', 'AlarmOutput', 'MDResult', 'HeatImagingTemper', 'SerialData', 'SceneChange', 'scenechangedetection alarm', 'Temperature Measurement Alarm', 'fielddetection alarm', 'TrafficVehiclePosition', 'TrafficJunction', 'shelteralarm alarm', 'NetworkChange', 'NetAbort', 'ipConflict alarm', 'AutoRegister'
+
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/zones/:id/trigger_event`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| event_description | query/body | Event vmd description from documentation | yes | String  |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/zones/5d1f0bf741092775efbddd71/trigger_event" \
+     --data '{"event_description":"CrossLineDetection"}' \
+     --request POST \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+  {
+    "success": "ok",
+    "error": null
+  }
+```
+
+In case if request is failed it returns "success": "error"<br/>
+The error could be:<br/>
+`Failed to connect to tetherbox!` - in case when expired connection timeout to TB<br/>
+`Wrong event description!` - in case if bad description parameter in request
 
 
 
@@ -603,12 +750,12 @@ This endpoint retrieves all recordings related to user.
 
 | Name | Located in | Description | Required | Type |
 | ---- | ---------- | ----------- | -------- | ---- |
-| at | query | Timestamp of recording to search | No | Datetime |
+| at | query | Timestamp of recording to search | Yes | Datetime |
 | zone_id | query | Zone ID to find recording in | Yes | String |
 
 
 ```shell
-curl "https://my.timeline.is/api/v3p/recordings?zone_id=5f06e4e741092794a7010c29" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
+curl "https://my.timeline.is/api/v3p/recordings?zone_id=5f06e4e741092794a7010c29&at=2020-04-25T08:03:36.094+01:00" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
 ```
 > The above command returns JSON structured like this:
 
