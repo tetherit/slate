@@ -746,12 +746,12 @@ This endpoint allows you to pass PTZ commands to zone.
 
 | Name | Located in | Description | Required | Type |
 | ---- | ---------- | ----------- | -------- | ---- |
-| action | query/body | Actions(move_auto, move_right, mode_left, move_up, move_down, move_left_down, move_right_down, move_left_up, move_right_up, zoom_in, zoom_out, fetch_presets, wiper, light, goto_preset) | Yes | String |
+| action | query/body | Actions(move_auto, move_right, move_left, move_up, move_down, move_left_down, move_right_down, move_left_up, move_right_up, zoom_in, zoom_out, fetch_presets, wiper, light, goto_preset) | Yes | String |
 | params | query/body | Additional parameters e.g (seeed: 5) | Yes | Hash |
 
 
 ```shell
-curl "https://my.timelline.is/api/v3p/5d1f0bf741092775efbddd71/ptz" \
+curl "https://my.timelline.is/api/v3p/zones/5d1f0bf741092775efbddd71/ptz" \
      --data '{"action":"move.right","params":{ "speed": "5"} }' \
      --request POST \
      -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
@@ -773,7 +773,7 @@ This endpoint allows you play audio announcement on Tetherbox.
 | audio_base64 | query/body | Audio file in Base64 Ogg.Opus format | Yes | String |
 
 ```shell
-curl "https://my.timelline.is/api/v3p/5d1f0bf741092775efbddd71/audio_challenge" \
+curl "https://my.timelline.is/api/v3p/zones/5d1f0bf741092775efbddd71/audio_challenge" \
      --data '{"audio_base64":"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"}' \
      --request POST \
      -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
@@ -781,6 +781,110 @@ curl "https://my.timelline.is/api/v3p/5d1f0bf741092775efbddd71/audio_challenge" 
 ```
 
 > The above command returns 200 status without body
+
+
+
+# Devices
+
+## Get list of devices
+
+This endpoint retrieves all devices related to user.
+
+### HTTP Request
+`GET https://my.timeline.is/api/v3p/devices`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+
+
+```shell
+curl "https://my.timeline.is/api/v3p/devices" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
+```
+> The above command returns JSON structured like this:
+
+```json
+{
+  "data":[{
+    "id": "5cc03955a34dbe549ad28122",
+    "type": "devices",
+    "attributes": {
+    "ip": "192.168.1.12",
+    "mac": "00:1E:B8:0F:C1:45",
+    "vendor": "Aloys",
+    "tunnel": {},
+    "active": false,
+    "activated": false,
+    "last_seen": "2020-07-11T14:56:16.511+01:00",
+    "device_name": null,
+    "percentage_packet_loss": 0,
+    "agent_id": "5cc029d7a34dbe549ad280c4",
+    "timeline_id": "5c50604ca34dbe182afa1249",
+    "location_id": "5cbd9783a34dbe31251a64b2",
+    "tunnel": []
+    }
+  }]
+}
+```
+
+## Open tunnel
+
+This endpoint allows you to open tunnel to the device if its on-line.
+
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/devices/:device_id/open_tunnel`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| port | query/body | TCP Port number | Yes | Integer |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/devices/5d1f0bf741092775efbddd71/open_tunnel" \
+     --data '{ "port": 8080 }' \
+     --request POST \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+> The above command returns JSON structured like this:
+
+```json
+{
+  "data": {}
+}
+```
+
+## Close tunnel
+
+This endpoint allows you to close tunnel to the device.
+
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/devices/:device_id/close_tunnel`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| port | query/body | TCP Port number | Yes | Integer |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/devices/5d1f0bf741092775efbddd71/close_tunnel" \
+     --data '{ "port": 8080 }' \
+     --request POST \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+> The above command returns JSON structured like this:
+
+```json
+{
+  "data": {}
+}
+```
 
 
 
