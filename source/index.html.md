@@ -535,6 +535,32 @@ curl "https://my.timeline.is/api/v3p/lpr_plates/:id" -H "Authorization: Bearer Y
 
 
 
+# Live
+
+## Get MJPEG live stream from a camera
+
+This endpoint returns MJPEG live stream from a camera.
+
+### HTTP Request
+`GET https://my.timeline.is/live/:zone_id/stream?token=timeline_api_token`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| token | query | Timeline API_token | No | String |
+
+
+```shell
+curl "https://my.timeline.is/live/:zone_id/stream?token=timeline_api_token"
+```
+
+```shell
+curl "https://my.timeline.is/live/:zone_id/stream" -H "Authorization: Bearer YOUR_OAUTH_TOKEN"
+
+```
+
+
 # Perspectives
 
 ## Get all presets
