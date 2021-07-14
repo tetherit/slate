@@ -778,7 +778,7 @@ This endpoint allows you to pass PTZ commands to zone.
 
 ```shell
 curl "https://my.timelline.is/api/v3p/zones/5d1f0bf741092775efbddd71/ptz" \
-     --data '{"action":"move.right","params":{ "speed": "5"} }' \
+     --data '{"action":"move_right","params":{ "speed": "5"} }' \
      --request POST \
      -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
      -H "Content-Type: application/json"
@@ -832,23 +832,23 @@ curl "https://my.timeline.is/api/v3p/devices" -H "Authorization: Bearer YOUR_OAU
 
 ```json
 {
-  "data":[{
+  "data": [{
     "id": "5cc03955a34dbe549ad28122",
     "type": "devices",
     "attributes": {
-    "ip": "192.168.1.12",
-    "mac": "00:1E:B8:0F:C1:45",
-    "vendor": "Aloys",
-    "tunnel": {},
-    "active": false,
-    "activated": false,
-    "last_seen": "2020-07-11T14:56:16.511+01:00",
-    "device_name": null,
-    "percentage_packet_loss": 0,
-    "agent_id": "5cc029d7a34dbe549ad280c4",
-    "timeline_id": "5c50604ca34dbe182afa1249",
-    "location_id": "5cbd9783a34dbe31251a64b2",
-    "tunnel": []
+      "ip": "192.168.1.12",
+      "mac": "00:1E:B8:0F:C1:45",
+      "vendor": "Aloys",
+      "tunnel": {},
+      "active": false,
+      "activated": false,
+      "last_seen": "2020-07-11T14:56:16.511+01:00",
+      "device_name": null,
+      "percentage_packet_loss": 0,
+      "agent_id": "5cc029d7a34dbe549ad280c4",
+      "timeline_id": "5c50604ca34dbe182afa1249",
+      "location_id": "5cbd9783a34dbe31251a64b2",
+      "tunnel": []
     }
   }]
 }
@@ -856,8 +856,7 @@ curl "https://my.timeline.is/api/v3p/devices" -H "Authorization: Bearer YOUR_OAU
 
 ## Open tunnel
 
-This endpoint allows you to open tunnel to the device if its on-line.
-The tunnel is active 1 hour since opening time.
+This endpoint allows you to open a tunnel to the device if it's online. The tunnel is active for 1 hour since opening time.
 
 ### HTTP Request
 `POST https://my.timeline.is/api/v3p/devices/:device_id/open_tunnel`
@@ -866,7 +865,7 @@ The tunnel is active 1 hour since opening time.
 
 | Name | Located in | Description | Required | Type |
 | ---- | ---------- | ----------- | -------- | ---- |
-| port | query/body | TCP Port number | Yes | Integer |
+| port | query/body | TCP Port number (default 80) | No | Integer |
 
 
 ```shell
