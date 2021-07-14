@@ -877,9 +877,6 @@ curl "https://my.timelline.is/api/v3p/devices/5d1f0bf741092775efbddd71/open_tunn
      -H "Content-Type: application/json"
 ```
 > The above command returns JSON structured like this:
-  Once you get a response you can use port in VLC player.
-  The rtsp URL will look like:
-  rtsp://admin:password@timeline.is:37310/Streaming/Channels/102
 
 ```json
 {
@@ -892,6 +889,9 @@ curl "https://my.timelline.is/api/v3p/devices/5d1f0bf741092775efbddd71/open_tunn
   }
 }
 ```
+> Once you get a response you can use port in VLC player.
+  The rtsp URL will look like:
+  rtsp://admin:password@timeline.is:37310/Streaming/Channels/102
 
 ## Close tunnel
 
