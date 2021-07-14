@@ -857,6 +857,7 @@ curl "https://my.timeline.is/api/v3p/devices" -H "Authorization: Bearer YOUR_OAU
 ## Open tunnel
 
 This endpoint allows you to open tunnel to the device if its on-line.
+The tunnel is active 1 hour since opening time.
 
 ### HTTP Request
 `POST https://my.timeline.is/api/v3p/devices/:device_id/open_tunnel`
@@ -870,16 +871,25 @@ This endpoint allows you to open tunnel to the device if its on-line.
 
 ```shell
 curl "https://my.timelline.is/api/v3p/devices/5d1f0bf741092775efbddd71/open_tunnel" \
-     --data '{ "port": 8080 }' \
+     --data '{ "port": 554 }' \
      --request POST \
      -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
      -H "Content-Type: application/json"
 ```
 > The above command returns JSON structured like this:
+  Once you get a response you can use port in VLC player.
+  The rtsp URL will look like:
+  rtsp://admin:password@timeline.is:37310/Streaming/Channels/102
 
 ```json
 {
-  "data": {}
+  "data": {
+    "37310": {
+      "port": 37310,
+      "to": 554,
+      "active_till": "2021-07-14T10:35:12.461+01:00"
+    }
+  }
 }
 ```
 
