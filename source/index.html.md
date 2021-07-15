@@ -773,13 +773,13 @@ This endpoint allows you to pass PTZ commands to zone.
 
 | Name | Located in | Description | Required | Type |
 | ---- | ---------- | ----------- | -------- | ---- |
-| action | query/body | Actions(move_auto, move_right, move_left, move_up, move_down, move_left_down, move_right_down, move_left_up, move_right_up, zoom_in, zoom_out, fetch_presets, wiper, light, goto_preset) | Yes | String |
+| direction | query/body | Actions(move_auto, move_right, move_left, move_up, move_down, move_left_down, move_right_down, move_left_up, move_right_up, zoom_in, zoom_out, fetch_presets, wiper, light, goto_preset) | Yes | String |
 | params | query/body | Additional parameters e.g (seeed: 5) | Yes | Hash |
 
 
 ```shell
 curl "https://my.timelline.is/api/v3p/zones/5d1f0bf741092775efbddd71/ptz" \
-     --data '{"action":"move_right","params":{ "speed": "5"} }' \
+     --data '{"direction":"move_right","params":{ "speed": "5"} }' \
      --request POST \
      -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
      -H "Content-Type: application/json"
