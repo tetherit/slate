@@ -664,7 +664,8 @@ curl "https://my.timeline.is/api/v3p/zones" -H "Authorization: Bearer YOUR_OAUTH
       "type": "zones",
       "attributes": {
         "name": "Camera 2",
-        "active": true
+        "active": true,
+        "device_id": "54c91a6d7365725aeb2e0f08"
       }
     }
   ],
@@ -832,25 +833,26 @@ curl "https://my.timeline.is/api/v3p/devices" -H "Authorization: Bearer YOUR_OAU
 
 ```json
 {
-  "data": [{
-    "id": "5cc03955a34dbe549ad28122",
-    "type": "devices",
-    "attributes": {
-      "ip": "192.168.1.12",
-      "mac": "00:1E:B8:0F:C1:45",
-      "vendor": "Aloys",
-      "tunnel": {},
-      "active": false,
-      "activated": false,
-      "last_seen": "2020-07-11T14:56:16.511+01:00",
-      "device_name": null,
-      "percentage_packet_loss": 0,
-      "agent_id": "5cc029d7a34dbe549ad280c4",
-      "timeline_id": "5c50604ca34dbe182afa1249",
-      "location_id": "5cbd9783a34dbe31251a64b2",
-      "tunnel": []
-    }
-  }]
+  "id": "5e8b135ca34dbe4eee61c56b",
+  "type": "devices",
+  "attributes": {
+    "active": false,
+    "activated": false,
+    "last_seen": "2021-07-13T21:33:02.662+01:00",
+    "device_name": null,
+    "percentage_packet_loss": 0,
+    "ip": "10.11.160.252",
+    "mac": "54:C4:15:88:4B:90",
+    "vendor": "Hangzhou Hikvision Digital",
+    "agent_id": "5d404864a34dbe15c8a4f3ca",
+    "timeline_id": "5c50604ca34dbe182afa1249",
+    "location_id": "5c5d7ae8a34dbe565274f2fc",
+    "tunnels": [{
+      "port": 37310,
+      "to": 554,
+      "active_till": "2021-07-14T09:35:12.461Z"
+    }]
+  }
 }
 ```
 
@@ -879,13 +881,11 @@ curl "https://my.timelline.is/api/v3p/devices/5d1f0bf741092775efbddd71/open_tunn
 
 ```json
 {
-  "data": {
-    "37310": {
-      "port": 37310,
-      "to": 554,
-      "active_till": "2021-07-14T10:35:12.461+01:00"
-    }
-  }
+  "tunnels": [{
+    "port": 37310,
+    "to": 554,
+    "active_till": "2021-07-14T09:35:12.461Z"
+  }]
 }
 ```
 > Once you get a response you can use port in VLC player.
