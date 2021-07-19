@@ -787,6 +787,71 @@ curl "https://my.timelline.is/api/v3p/zones/5d1f0bf741092775efbddd71/ptz" \
 
 > The above command returns 200 status without body
 
+## Relay Outputs
+This endpoint returns a list of relay outputs for zone.
+### HTTP Request
+`GET https://my.timeline.is/api/v3p/:zone_id/relay_outputs`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/zones/5d1f0bf741092775efbddd71/relay_outputs" \
+     --request GET \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+
+> The above command returns
+
+```json
+{
+  "relay_outputs": [{
+      "properties": {
+        "mode": "Bistable",
+        "delay_time": "PT3S",
+        "idle_state": "closed"
+      },
+      "@token": "2"
+    },
+    {
+      "properties": {
+        "mode": "Monostable",
+        "delay_time": "PT5S",
+        "idle_state": "open"
+      },
+      "@token": "3"
+    }
+  ]
+}
+```
+
+
+## Relay
+This endpoint allows you to change the zone relay status by its token.
+### HTTP Request
+`POST https://my.timeline.is/api/v3p/:zone_id/relay`
+
+**Parameters**
+
+| Name | Located in | Description | Required | Type |
+| ---- | ---------- | ----------- | -------- | ---- |
+| relay | query/body | Relay token/number | Yes | Integer |
+| state | query/body | Sate ON/OFF (default true) | No | Boolean |
+
+
+```shell
+curl "https://my.timelline.is/api/v3p/zones/5d1f0bf741092775efbddd71/relay" \
+     --data '{"relay": 3,"state": true}' \
+     --request POST \
+     -H "Authorization: Bearer YOUR_OAUTH_TOKEN" \
+     -H "Content-Type: application/json"
+```
+
+> The above command returns 200 status without body
 
 ## Audio challenge
 This endpoint allows you play audio announcement on Tetherbox.
