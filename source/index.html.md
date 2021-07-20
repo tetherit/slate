@@ -472,7 +472,7 @@ curl "https://my.timeline.is/api/v3p/lpr_plates" -H "Authorization: Bearer YOUR_
       "expiry_date": "2021-04-21T20:13:23.440+01:00",
       "updated_at": "2021-04-21T20:13:23.441+01:00",
       "created_at": "2021-04-21T20:13:23.441+01:00",
-      "agent_id": "6080794a638d9d57daa71704"
+      "camera_id": "6080794a638d9d57daa71704"
     }
   }],
   "jsonapi": { "version": "1.0" }
@@ -491,7 +491,7 @@ This endpoint creates whitelist blacklist license plate.
 | plate_number | query | License plate number| Yes | String |
 | group | query | whitelist or blacklist | No | String |
 | expiry_date | query | Expiry date | No | Datetime |
-| agent_id | query | Tetherbox id | Yes | String |
+| camera_id | query | Camera Id | Yes | String |
 
 
 ```shell
@@ -511,7 +511,7 @@ curl "https://my.timeline.is/api/v3p/lpr_plates" -H "Authorization: Bearer YOUR_
       "expiry_date": "2021-04-21T20:13:23.440+01:00",
       "updated_at": null,
       "created_at": "2021-04-21T20:13:23.441+01:00",
-      "agent_id": "6080794a638d9d57daa71704"
+      "camera_id": "6080794a638d9d57daa71704"
     }
   },
   "jsonapi": { "version": "1.0" }
